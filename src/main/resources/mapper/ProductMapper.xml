@@ -34,6 +34,6 @@
         select * from product where cid=#{cid}
     </select>
     <select id="search" resultType="Product">
-        select * from product where name like '%'#{keyword}'%' or subtitle like '%'#{keyword}'%'
+        select * from product where name like concat('%',#{keyword},'%') or subtitle like concat('%',#{keyword},'%')
     </select>
 </mapper>
