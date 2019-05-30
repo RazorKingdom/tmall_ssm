@@ -20,7 +20,7 @@
         select count(*) from product where cid=#{cid}
     </select>
     <insert id="add" parameterType="Product" keyProperty="id" useGeneratedKeys="true">
-        insert product(name,subTitle,originalPrice,promotePrice,stock,cid,createDate)
+        insert into product(name,subTitle,originalPrice,promotePrice,stock,cid,createDate)
         values(#{name},#{subTitle},#{originalPrice},#{promotePrice},#{stock},#{cid},#{createDate})
     </insert>
     <delete id="delete" parameterType="int" >
@@ -32,5 +32,8 @@
     </update>
     <select id="listByCategoryId" resultType="Product">
         select * from product where cid=#{cid}
+    </select>
+    <select id="search" resultType="Product">
+        select * from product where name like '%'#{keyword}'%' or subtitle like '%'#{keyword}'%'
     </select>
 </mapper>

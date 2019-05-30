@@ -1,7 +1,6 @@
 package com.ssm.tmall.controller.back;
 
 import com.ssm.tmall.pojo.Product;
-import com.ssm.tmall.pojo.Property;
 import com.ssm.tmall.pojo.PropertyValue;
 import com.ssm.tmall.service.CategoryService;
 import com.ssm.tmall.service.ProductService;
@@ -32,10 +31,6 @@ public class PropertyValueController {
         Product product = productService.get(pid);
         propertyValueService.init(product);
         List<PropertyValue> pvs = propertyValueService.list(pid);
-        for (PropertyValue pv : pvs) {
-            Property property = propertyService.get(pv.getPtid());
-            pv.setProperty(property);
-        }
         model.addAttribute("p",product);
         model.addAttribute("pvs",pvs);
         return "admin/editPropertyValue";

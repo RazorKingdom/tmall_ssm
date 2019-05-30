@@ -35,9 +35,18 @@ public class ForeProdutController {
         productService.setSaleAndReviewNumber(product);
         productService.setSingleAndDetailPic(product);
 
-        model.addAttribute("p",product);
-        model.addAttribute("pvs",propertyValues);
-        model.addAttribute("reviews",reviews);
+        model.addAttribute("p", product);
+        model.addAttribute("pvs", propertyValues);
+        model.addAttribute("reviews", reviews);
         return "fore/product";
+    }
+
+    @RequestMapping("foresearch")
+    public String search(String keyword, Model model) {
+        List<Product> products = productService.search(keyword);
+        productService.setSaleAndReviewNumber(products);
+
+        model.addAttribute("ps", products);
+        return "fore/searchResult";
     }
 }

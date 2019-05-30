@@ -15,4 +15,6 @@ public interface ProductMapper {
     void update(Product product);
 
     List<Product> listByCategoryId(Integer cid);
+
+    List<Product> search(String keyword);
 }

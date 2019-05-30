@@ -23,10 +23,6 @@ public interface ProductService {
 
     void update(Product product);
 
-    void setFirstProductImage(Product product);
-
-    void setFirstProductImage(List<Product> ps);
-
     void fill(List<Category> categorys);
 
     void fill(Category category);
@@ -34,4 +30,8 @@ public interface ProductService {
     void fillByRow(List<Category> categorys);
 
     void setSingleAndDetailPic(Product product);
+
+    List<Product> search(String keyword);
+
+
 }

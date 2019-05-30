@@ -19,7 +19,9 @@ public class PropertyValueServiceImpl implements PropertyValueService {
 
     @Override
     public PropertyValue get(int pid, int ptid) {
-        return propertyValueMapper.get(pid, ptid);
+        PropertyValue propertyValue= propertyValueMapper.get(pid, ptid);
+        setProperty(propertyValue);
+        return propertyValue;
     }
 
     @Override
@@ -29,7 +31,9 @@ public class PropertyValueServiceImpl implements PropertyValueService {
 
     @Override
     public List<PropertyValue> list(int pid) {
-        return propertyValueMapper.list(pid);
+        List<PropertyValue>pvs= propertyValueMapper.list(pid);
+        setProperty(pvs);
+        return pvs;
     }
 
     @Override
@@ -47,5 +51,14 @@ public class PropertyValueServiceImpl implements PropertyValueService {
             if (propertyValue == null)
                 propertyValueMapper.add(pid, ptid);
         }
+    }
+
+    private void setProperty(PropertyValue propertyValue){
+        propertyValue.setProperty(propertyService.get(propertyValue.getPtid()));
+    }
+
+    private void setProperty(List<PropertyValue> propertyValues){
+        for(PropertyValue propertyValue:propertyValues)
+            setProperty(propertyValue);
     }
 }
