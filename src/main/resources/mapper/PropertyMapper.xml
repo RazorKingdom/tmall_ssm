@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssm.tmall.mapper.PropertyMapper">
+    <select id="list" resultType="Property">
+        select * from property
+        <if test="cid!=null">
+            where cid=#{cid}
+        </if>
+        order by id desc
+        <if test="page.start!=null and page.count!=null">
+            limit #{page.start},#{page.count}
+        </if>
+    </select>
+    <select id="get" resultType="Property">
+        select * from property where id=#{id}
+    </select>
+    <select id="total" resultType="int">
+        select count(*) from property where cid=#{cid}
+    </select>
+    <insert id="add" keyProperty="id" useGeneratedKeys="true" parameterType="Property">
+        insert property(cid,name) values(#{cid},#{name})
+    </insert>
+    <update id="update" parameterType="Property">
+        update property set cid=#{cid},name=#{name} where id=#{id}
+    </update>
+    <delete id="delete" parameterType="int">
+        delete from property where id=#{id}
+    </delete>
+    <select id="listNotPage" resultType="Integer">
+        select id from property
+        <if test="cid!=null">
+            where cid=#{cid}
+        </if>
+        order by id desc
+    </select>
+</mapper>

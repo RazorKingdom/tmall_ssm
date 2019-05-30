@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssm.tmall.mapper.OrderItemMapper">
+    <select id="listByUserId" resultType="OrderItem">
+        select * from orderitem where uid=#{id}
+    </select>
+    <select id="listByOrderId" resultType="OrderItem">
+        select * from orderitem where oid=#{id}
+    </select>
+    <select id="get" resultType="OrderItem">
+        select * from orderitem where id=#{id}
+    </select>
+    <insert id="insert" parameterType="OrderItem" keyProperty="id" useGeneratedKeys="true">
+        insert into orderitem(pid,oid,uid,number) values(#{pid},#{oid},#{uid},#{number})
+    </insert>
+    <update id="update" parameterType="OrderItem">
+        update orderitem set pid=#{pid},oid=#{oid},uid=#{uid},number=#{number} where id=#{id}
+    </update>
+    <delete id="delete" parameterType="Integer">
+        delete from orderitem where id=#{id}
+    </delete>
+    <select id="listByProductId" resultType="OrderItem">
+        select * from orderitem where pid=#{pid}
+    </select>
+</mapper>

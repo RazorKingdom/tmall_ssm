@@ -1,0 +1,1 @@
+1.当在分类管理中修改了分类的属性之后,admin_propertyValue_edit的页面第一次打开会报500错误，mybatis绑定异常

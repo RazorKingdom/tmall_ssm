@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssm.tmall.mapper.ReviewMapper">
+    <insert id="add" keyProperty="id" useGeneratedKeys="true" parameterType="Review">
+        insert into review(content, uid, pid, createDate) values(#{content},#{uid},#{pid},
+        #{createDate})
+    </insert>
+    <delete id="delete" parameterType="int">
+        delete from review where id=#{id}
+    </delete>
+    <update id="update" parameterType="Review">
+        update review set content=#{content} where id=#{id}
+    </update>
+    <select id="get" resultType="Review">
+        select * from review where id=#{id}
+    </select>
+    <select id="listByProduct" resultType="Review">
+        select * from review where pid=#{pid}
+    </select>
+    <select id="getCount" resultType="int">
+        select count(*) from review where pid=#{pid}
+    </select>
+</mapper>

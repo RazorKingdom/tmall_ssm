@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssm.tmall.mapper.PropertyValueMapper">
+    <select id="get" resultType="PropertyValue">
+        select * from propertyvalue
+        <where>
+            <if test="pid!=null">
+                pid=#{pid}
+            </if>
+            <if test="ptid!=null">
+               and ptid=#{ptid}
+            </if>
+        </where>
+    </select>
+    <update id="update" parameterType="PropertyValue">
+        update propertyvalue set value=#{value} where id=#{id}
+    </update>
+    <insert id="add">
+        insert propertyvalue(pid,ptid) values(#{pid},#{ptid})
+    </insert>
+    <select id="list" resultType="PropertyValue">
+        select * from propertyvalue
+        <if test="pid!=null">
+            where pid=#{pid}
+        </if>
+    </select>
+    <select id="listwithint" resultType="Integer">
+        select ptid from propertyvalue where pid=#{pid}
+    </select>
+    <delete id="delete" parameterType="int">
+        delete from propertyvalue where pid=#{pid} and ptid=#{ptid}
+    </delete>
+</mapper>
