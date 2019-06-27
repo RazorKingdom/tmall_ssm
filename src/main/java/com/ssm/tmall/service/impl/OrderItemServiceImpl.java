@@ -20,8 +20,8 @@ public class OrderItemServiceImpl implements OrderItemService {
     ProductService productService;
 
     @Override
-    public void add(OrderItem orderItem) {
-        orderItemMapper.add(orderItem);
+    public Integer add(OrderItem orderItem) {
+        return orderItemMapper.add(orderItem);
     }
 
     @Override
@@ -40,7 +40,7 @@ public class OrderItemServiceImpl implements OrderItemService {
     }
 
     @Override
-    public List<OrderItem> list(Product product){
+    public List<OrderItem> list(Product product) {
         return orderItemMapper.listByProductId(product.getId());
     }
 
@@ -52,7 +52,15 @@ public class OrderItemServiceImpl implements OrderItemService {
 
     @Override
     public OrderItem get(int id) {
-        return orderItemMapper.get(id);
+        OrderItem orderItem = orderItemMapper.get(id);
+        setProduct(orderItem);
+        return orderItem;
+    }
+
+    private void setProduct(OrderItem orderItem) {
+        int pid=orderItem.getPid();
+        Product p=productService.get(pid);
+        orderItem.setProduct(p);
     }
 
     @Override
@@ -65,12 +73,12 @@ public class OrderItemServiceImpl implements OrderItemService {
     public void fill(Order order) {
         List<OrderItem> orderItems = orderItemMapper.listByOrderId(order);
         float total = 0;
-        int totalNumber=0;
+        int totalNumber = 0;
         for (OrderItem orderItem : orderItems) {
-            Product product=productService.get(orderItem.getPid());
+            Product product = productService.get(orderItem.getPid());
             orderItem.setProduct(product);
-            total+=orderItem.getNumber()*product.getPromotePrice();
-            totalNumber+=orderItem.getNumber();
+            total += orderItem.getNumber() * product.getPromotePrice();
+            totalNumber += orderItem.getNumber();
         }
         order.setTotal(total);
         order.setTotalNumber(totalNumber);

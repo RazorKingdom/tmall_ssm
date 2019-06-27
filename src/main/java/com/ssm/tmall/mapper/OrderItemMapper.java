@@ -7,7 +7,7 @@ import com.ssm.tmall.pojo.User;
 import java.util.List;
 
 public interface OrderItemMapper {
-    void add(OrderItem orderItem);
+    int add(OrderItem orderItem);
 
     void delete(int id);
 

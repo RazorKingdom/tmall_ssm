@@ -12,7 +12,7 @@
     <select id="get" resultType="OrderItem">
         select * from orderitem where id=#{id}
     </select>
-    <insert id="insert" parameterType="OrderItem" keyProperty="id" useGeneratedKeys="true">
+    <insert id="add" parameterType="OrderItem" useGeneratedKeys="true" keyProperty="id">
         insert into orderitem(pid,oid,uid,number) values(#{pid},#{oid},#{uid},#{number})
     </insert>
     <update id="update" parameterType="OrderItem">

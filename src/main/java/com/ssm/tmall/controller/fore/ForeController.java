@@ -48,8 +48,8 @@ public class ForeController {
     }
 
     @RequestMapping("forelogin")
-    public String login(@RequestParam("name") String name, @RequestParam("password")
-            String password, HttpSession httpSession, Model model) {
+    public String login(@RequestParam("name") String name, HttpSession httpSession, @RequestParam("password")
+            String password, Model model) {
         HtmlUtils.htmlEscape(name);
         User user = userService.loginVeri(name, password);
         if (user == null) {
@@ -65,6 +65,7 @@ public class ForeController {
         httpSession.removeAttribute("user");
         return "redirect:forehome";
     }
+
 
     @RequestMapping("forecheckLogin")
     @ResponseBody

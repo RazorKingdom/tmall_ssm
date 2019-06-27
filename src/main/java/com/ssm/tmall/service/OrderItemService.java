@@ -8,7 +8,7 @@ import com.ssm.tmall.pojo.User;
 import java.util.List;
 
 public interface OrderItemService {
-    void add(OrderItem orderItem);
+    Integer add(OrderItem orderItem);
     void delete(int id);
     void update(OrderItem orderItem);
     List<OrderItem> list(User user);
